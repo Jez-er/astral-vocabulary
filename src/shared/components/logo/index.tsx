@@ -1,20 +1,22 @@
 import { BookMarked } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import $PAGES from '../../../app/routing/page.config'
 
 interface props {
-	WithText: boolean
+	WithText?: boolean
+	size?: number
 }
 
-const Logo = ({ WithText }: props) => {
+const Logo = ({ WithText, size = 36 }: props) => {
 	const path = useNavigate()
 
 	return (
 		<div
 			className='flex items-center gap-2 cursor-pointer'
-			onClick={() => path('/')}
+			onClick={() => path($PAGES.HOME)}
 		>
 			<div className='text-violet-500 hover:text-white transition-all duration-300'>
-				<BookMarked size={36} />
+				<BookMarked size={size} />
 			</div>
 			{WithText ? (
 				<div>
