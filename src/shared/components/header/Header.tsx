@@ -21,7 +21,9 @@ const Header = () => {
 				))}
 			</nav>
 			<div>
-				<Button className='cursor-pointer'>Profile</Button>
+				<Button variant='border' className='cursor-pointer px-7'>
+					Profile
+				</Button>
 			</div>
 		</section>
 	)
