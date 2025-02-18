@@ -5,7 +5,7 @@ import { HeaderData } from './data'
 
 const Header = () => {
 	return (
-		<section className='px-52 flex h-full w-full items-center justify-around border-b-2 border-gray-400 py-3.5'>
+		<section className='px-52 flex h-full w-full items-center justify-around border-b-2 border-gray-400 py-2.5'>
 			<div>
 				<Logo WithText />
 			</div>
