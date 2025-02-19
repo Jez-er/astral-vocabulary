@@ -1,37 +1,57 @@
-import { useForm } from 'react-hook-form'
-import { NavLink, useNavigate } from 'react-router'
-import $PAGES from '../../../app/routing/page.config'
-import { cn } from '../../../lib/utils'
-import { AuthService } from '../../../service/api/backend/auth'
-import Logo from '../../../shared/components/logo'
-import { Button } from '../../../shared/ui/button'
+import $PAGES from '@/app/routing/page.config'
+import { toast } from '@/hooks/use-toast'
+import { AuthSchema } from '@/lib/auth_schemas'
+import { cn } from '@/lib/utils'
+import { AuthService } from '@/service/api/backend/auth'
+import Logo from '@/shared/components/logo'
+import { Button } from '@/shared/ui/button'
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '../../../shared/ui/card'
-import { Input } from '../../../shared/ui/input'
-import { Label } from '../../../shared/ui/label'
-import { IAuthFields } from '../../../types/auth.types'
-import OAuthButtons from '../components/oauth/OAuthButtons'
+} from '@/shared/ui/card'
+import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
+import { IAuthFields } from '@/types/auth.types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { NavLink, useNavigate } from 'react-router'
 
 const RegistrationPage = () => {
 	const path = useNavigate()
 
-	const { register, handleSubmit } = useForm<IAuthFields>({
+	const { register, handleSubmit, formState } = useForm<IAuthFields>({
 		defaultValues: {
 			email: '',
 			password: '',
 		},
+		resolver: zodResolver(AuthSchema),
 	})
+
+	const { errors } = formState
 
 	const addUser = (fields: IAuthFields) => {
 		const mutate = AuthService.signUp(fields)
 
 		mutate.finally(() => {
 			path($PAGES.AUTH.REGISTRATION.PROFILE)
+		})
+		mutate.then(data => {
+			if (data.error?.message) {
+				toast({
+					title: data.error?.message,
+					variant: 'destructive',
+				})
+			}
+		})
+		mutate.catch(e => {
+			toast({
+				title: 'Query error',
+				description: e,
+				variant: 'destructive',
+			})
 		})
 	}
 
@@ -55,11 +75,14 @@ const RegistrationPage = () => {
 								<Label htmlFor='email'>Email</Label>
 								<Input
 									id='email'
-									type='email'
+									type='text'
 									placeholder='J.Jeferson@example.com'
 									{...register('email')}
 									required
 								/>
+								<Label htmlFor='email' className='text-red-800'>
+									{errors.email?.message}
+								</Label>
 							</div>
 							<div className='grid gap-2'>
 								<div className='flex items-center'>
@@ -77,6 +100,9 @@ const RegistrationPage = () => {
 									required
 									{...register('password')}
 								/>
+								<Label htmlFor='password' className='text-red-800'>
+									{errors.password?.message}
+								</Label>
 							</div>
 							<Button
 								type='submit'
@@ -84,7 +110,6 @@ const RegistrationPage = () => {
 							>
 								Next
 							</Button>
-							<OAuthButtons />
 						</div>
 						<div className='mt-4 text-center text-sm hover:text-white duration-300 transition-all'>
 							Already have an account?{' '}

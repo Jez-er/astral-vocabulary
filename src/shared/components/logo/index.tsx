@@ -1,6 +1,6 @@
+import $PAGES from '@/app/routing/page.config'
 import { BookMarked } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import $PAGES from '../../../app/routing/page.config'
 
 interface props {
 	WithText?: boolean

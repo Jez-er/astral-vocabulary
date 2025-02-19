@@ -1,11 +1,11 @@
+import AuthLayout from '@/layout/AuthLayout'
+import MainLayout from '@/layout/MainLayout'
+import LoginPage from '@/pages/Auth/login'
+import RegistrationPage from '@/pages/Auth/registration'
+import RegistrationEmailPage from '@/pages/Auth/registration/CheckEmail'
+import RegistrationProfilePage from '@/pages/Auth/registration/ProfilePage'
+import HomePage from '@/pages/Home/page'
 import { Route, Routes } from 'react-router'
-import AuthLayout from '../../layout/AuthLayout'
-import MainLayout from '../../layout/MainLayout'
-import LoginPage from '../../pages/Auth/login'
-import RegistrationPage from '../../pages/Auth/registration'
-import RegistrationEmailPage from '../../pages/Auth/registration/CheckEmail'
-import RegistrationProfilePage from '../../pages/Auth/registration/ProfilePage'
-import HomePage from '../../pages/Home/page'
 import $PAGES from './page.config'
 
 export const AppRoutes = () => {
