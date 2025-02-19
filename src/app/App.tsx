@@ -1,4 +1,4 @@
-import { AppRoutes } from './routind/routes'
+import { AppRoutes } from './routing/routes'
 
 function App() {
 	return (

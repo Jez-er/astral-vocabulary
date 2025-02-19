@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
+import $PAGES from '../../../app/routing/page.config'
 import { Button } from '../../ui/button'
 import Logo from '../logo'
 import { HeaderData } from './data'
 
 const Header = () => {
+	const path = useNavigate()
+
 	return (
 		<section className='px-52 flex h-full w-full items-center justify-around border-b-2 border-gray-400 py-2.5'>
 			<div>
@@ -21,7 +24,11 @@ const Header = () => {
 				))}
 			</nav>
 			<div>
-				<Button variant='border' className='cursor-pointer px-7'>
+				<Button
+					variant='border'
+					className='cursor-pointer px-7'
+					onClick={() => path($PAGES.AUTH.LOGIN)}
+				>
 					Profile
 				</Button>
 			</div>
