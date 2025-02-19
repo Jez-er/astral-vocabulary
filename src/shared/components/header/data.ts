@@ -1,4 +1,4 @@
-import $PAGES from '../../../app/routing/page.config'
+import $PAGES from '@/app/routing/page.config'
 
 interface IHeaderData {
 	title: string

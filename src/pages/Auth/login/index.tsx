@@ -1,33 +1,37 @@
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { NavLink, useNavigate } from 'react-router'
-import $PAGES from '../../../app/routing/page.config'
-import { cn } from '../../../lib/utils'
-import Logo from '../../../shared/components/logo'
-import { Button } from '../../../shared/ui/button'
+import $PAGES from '@/app/routing/page.config'
+import { AuthSchema } from '@/lib/auth_schemas'
+import { cn } from '@/lib/utils'
+import Logo from '@/shared/components/logo'
+import { Button } from '@/shared/ui/button'
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '../../../shared/ui/card'
-import { Input } from '../../../shared/ui/input'
-import { Label } from '../../../shared/ui/label'
-import { useUserStore } from '../../../stores/user.store'
-import { IAuthFields } from '../../../types/auth.types'
-import OAuthButtons from '../components/oauth/OAuthButtons'
+} from '@/shared/ui/card'
+import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
+import { useUserStore } from '@/stores/user.store'
+import { IAuthFields } from '@/types/auth.types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { NavLink, useNavigate } from 'react-router'
 
 const LoginPage = () => {
 	const login = useUserStore(state => state.login)
 	const isAuth = useUserStore(state => state.isAuth)
 	const path = useNavigate()
-	const { register, handleSubmit } = useForm<IAuthFields>({
+	const { register, handleSubmit, formState } = useForm<IAuthFields>({
 		defaultValues: {
 			email: '',
 			password: '',
 		},
+		resolver: zodResolver(AuthSchema),
 	})
+
+	const { errors } = formState
 
 	const loginFN = (fields: IAuthFields) => {
 		login(fields)
@@ -57,11 +61,14 @@ const LoginPage = () => {
 								<Label htmlFor='email'>Email</Label>
 								<Input
 									id='email'
-									type='email'
+									type='text'
 									placeholder='J.Jeferson@example.com'
 									{...register('email')}
 									required
 								/>
+								<Label htmlFor='email' className='text-red-800'>
+									{errors.email?.message}
+								</Label>
 							</div>
 							<div className='grid gap-2'>
 								<div className='flex items-center'>
@@ -79,11 +86,16 @@ const LoginPage = () => {
 									{...register('password')}
 									required
 								/>
+								<Label htmlFor='password' className='text-red-800'>
+									{errors.password?.message}
+								</Label>
 							</div>
-							<Button type='submit' className='w-full bg-violet-800'>
+							<Button
+								type='submit'
+								className='w-full bg-violet-800 cursor-pointer'
+							>
 								Login
 							</Button>
-							<OAuthButtons />
 						</div>
 						<div className='mt-4 text-center text-sm hover:text-white duration-300 transition-all'>
 							Don&apos;t have an account?{' '}

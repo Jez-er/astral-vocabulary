@@ -1,20 +1,24 @@
-import $API from '../../../app/api'
-import { IAuthFields } from '../../../types/auth.types'
+import $API from '@/app/api'
+import { IAuthFields } from '@/types/auth.types'
 
 export const AuthService = {
 	async signUp(fields: IAuthFields) {
-		const { data } = await $API.auth.signUp({
+		const response = await $API.auth.signUp({
 			email: fields.email,
 			password: fields.password,
 		})
-		if (data.user) localStorage.setItem('userID', data.user.id)
+		if (response.data.user)
+			localStorage.setItem('userID', response.data.user.id)
+		return response
 	},
 
 	async singIn(fields: IAuthFields) {
-		return $API.auth.signInWithPassword({
+		const response = await $API.auth.signInWithPassword({
 			email: fields.email,
 			password: fields.password,
 		})
+
+		return response
 	},
 
 	async logOut() {

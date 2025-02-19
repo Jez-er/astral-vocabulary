@@ -1,35 +1,57 @@
-import { useForm } from 'react-hook-form'
-import { NavLink, useNavigate } from 'react-router'
-import $PAGES from '../../../app/routing/page.config'
-import { cn } from '../../../lib/utils'
-import { ProfileService } from '../../../service/api/backend/profile'
-import Logo from '../../../shared/components/logo'
-import { Button } from '../../../shared/ui/button'
+import $PAGES from '@/app/routing/page.config'
+import { toast } from '@/hooks/use-toast'
+import { NameSchema } from '@/lib/auth_schemas'
+import { cn } from '@/lib/utils'
+import { ProfileService } from '@/service/api/backend/profile'
+import Logo from '@/shared/components/logo'
+import { Button } from '@/shared/ui/button'
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '../../../shared/ui/card'
-import { Input } from '../../../shared/ui/input'
-import { Label } from '../../../shared/ui/label'
-import { IProfileFields } from '../../../types/profile.types'
+} from '@/shared/ui/card'
+import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
+import { IProfileFields } from '@/types/profile.types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { NavLink, useNavigate } from 'react-router'
 
 const RegistrationProfilePage = () => {
 	const path = useNavigate()
 
-	const { register, handleSubmit } = useForm<IProfileFields>({
+	const { register, handleSubmit, formState } = useForm<IProfileFields>({
 		defaultValues: {
 			name: '',
 		},
+		resolver: zodResolver(NameSchema),
 	})
+
+	const { errors } = formState
 
 	const createProfile = (fields: IProfileFields) => {
 		const mutate = ProfileService.create(fields)
 
 		mutate.finally(() => {
 			path($PAGES.AUTH.REGISTRATION.EMAIL)
+		})
+
+		mutate.then(data => {
+			if (data.error?.message) {
+				toast({
+					title: data.error?.message,
+					variant: 'destructive',
+				})
+			}
+		})
+		mutate.catch(e => {
+			toast({
+				title: 'Query error',
+				description: e,
+				variant: 'destructive',
+			})
 		})
 	}
 
@@ -50,7 +72,7 @@ const RegistrationProfilePage = () => {
 					<form onSubmit={handleSubmit(createProfile)}>
 						<div className='flex flex-col gap-6'>
 							<div className='grid gap-2'>
-								<Label htmlFor='email'>Name</Label>
+								<Label htmlFor='name'>Name</Label>
 								<Input
 									id='name'
 									type='name'
@@ -58,6 +80,9 @@ const RegistrationProfilePage = () => {
 									{...register('name')}
 									required
 								/>
+								<Label htmlFor='name' className='text-red-900'>
+									{errors.name?.message}
+								</Label>
 							</div>
 							<Button
 								type='submit'
