@@ -27,7 +27,7 @@ export const AuthService = {
 
 	async recoverPass(fields: IPassRecover) {
 		const response = await $API.auth.resetPasswordForEmail(fields.email, {
-			redirectTo: 'http://localhost:5173/utils/newpass',
+			redirectTo: `${import.meta.env.VITE_DOMAIN}/utils/newpass`,
 		})
 		if (response) localStorage.setItem('emailForRecover', fields.email)
 		return response
