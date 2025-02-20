@@ -1,5 +1,5 @@
-import $API from '../../../app/api'
-import { IProfileFields } from '../../../types/profile.types'
+import $API from '@/app/api'
+import { IProfileFields } from '@/types/profile.types'
 
 export const ProfileService = {
 	async create(fields: IProfileFields) {
