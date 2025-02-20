@@ -15,6 +15,9 @@ const $PAGES = {
 		index: '/utils',
 		NEW_PASS: '/utils/newpass',
 	},
+	DASHBOARD: {
+		index: '/dashboard',
+	},
 }
 
 export default $PAGES

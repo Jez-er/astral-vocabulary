@@ -8,7 +8,6 @@ import { HeaderData } from './data'
 const Header = () => {
 	const path = useNavigate()
 	const isAuth = useUserStore(state => state.isAuth)
-	const logout = useUserStore(state => state.logout)
 
 	return (
 		<section className='px-52 flex h-full w-full items-center justify-around border-b-2 border-gray-400 py-2.5'>
@@ -31,9 +30,9 @@ const Header = () => {
 					<Button
 						variant='border'
 						className='cursor-pointer px-7'
-						onClick={() => logout()}
+						onClick={() => path($PAGES.DASHBOARD.index)}
 					>
-						Log Out
+						Dashboard
 					</Button>
 				) : (
 					<Button
