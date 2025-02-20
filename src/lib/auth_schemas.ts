@@ -20,7 +20,29 @@ export const NameSchema = z.object({
 // export type LoginForm = z.infer<typeof loginSchema>
 
 export const passSchema = z.object({
-	Email: z.string().email('Invalid e-mail'),
+	email: z.string().email('Invalid e-mail'),
 })
 
 export type PassForm = z.infer<typeof passSchema>
+
+export const newPass = z
+	.object({
+		pass: z
+			.string()
+			.min(8, 'Min 8 characters')
+			.regex(/[0-9]/, 'At least 1 number')
+			.regex(/[A-Z]/, 'At least 1 uppercase letter')
+			.regex(/[a-z]/, 'At least 1 lowercase letter')
+			.regex(/[^a-zA-Z0-9]/, 'At least 1 special character'),
+		double: z
+			.string()
+			.min(8, 'Min 8 characters')
+			.regex(/[0-9]/, 'At least 1 number')
+			.regex(/[A-Z]/, 'At least 1 uppercase letter')
+			.regex(/[a-z]/, 'At least 1 lowercase letter')
+			.regex(/[^a-zA-Z0-9]/, 'At least 1 special character'),
+	})
+	.refine(data => data.pass === data.double, {
+		message: 'Passwords must match.',
+		path: ['double'],
+	})
