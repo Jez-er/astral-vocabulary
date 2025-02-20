@@ -1,5 +1,5 @@
 import $API from '@/app/api'
-import { IAuthFields } from '@/types/auth.types'
+import { IAuthFields, INewPassword, IPassRecover } from '@/types/auth.types'
 
 export const AuthService = {
 	async signUp(fields: IAuthFields) {
@@ -23,5 +23,26 @@ export const AuthService = {
 
 	async logOut() {
 		return $API.auth.signOut()
+	},
+
+	async recoverPass(fields: IPassRecover) {
+		const response = await $API.auth.resetPasswordForEmail(fields.email, {
+			redirectTo: 'http://localhost:5173/utils/newpass',
+		})
+		if (response) localStorage.setItem('emailForRecover', fields.email)
+		return response
+	},
+
+	async newPass(fields: INewPassword) {
+		const email = localStorage.getItem('emailForRecover')
+		if (!email) return
+
+		const response = await $API.auth.updateUser({
+			email: email,
+			password: fields.pass,
+		})
+
+		if (response) localStorage.removeItem('emailForRecover')
+		return response
 	},
 }

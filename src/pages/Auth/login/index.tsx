@@ -73,12 +73,12 @@ const LoginPage = () => {
 							<div className='grid gap-2'>
 								<div className='flex items-center'>
 									<Label htmlFor='password'>Password</Label>
-									<a
-										href='#'
-										className='ml-auto inline-block text-sm underline-offset-4 hover:underline hover:text-white duration-300 transition-all'
+									<NavLink
+										to={$PAGES.AUTH.PASS}
+										className='ml-auto inline-block text-xs underline-offset-4 hover:underline hover:text-white duration-300 transition-all'
 									>
 										Forgot your password?
-									</a>
+									</NavLink>
 								</div>
 								<Input
 									id='password'

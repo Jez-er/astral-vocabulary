@@ -1,10 +1,12 @@
 import AuthLayout from '@/layout/AuthLayout'
 import MainLayout from '@/layout/MainLayout'
+import ForgotPasswordPage from '@/pages/Auth/forgotPass/page'
 import LoginPage from '@/pages/Auth/login'
 import RegistrationPage from '@/pages/Auth/registration'
 import RegistrationEmailPage from '@/pages/Auth/registration/CheckEmail'
 import RegistrationProfilePage from '@/pages/Auth/registration/ProfilePage'
 import HomePage from '@/pages/Home/page'
+import NewPasswordPage from '@/pages/utils/NewPass.tsx/page'
 import { Route, Routes } from 'react-router'
 import $PAGES from './page.config'
 
@@ -29,6 +31,11 @@ export const AppRoutes = () => {
 					path={$PAGES.AUTH.REGISTRATION.EMAIL}
 					element={<RegistrationEmailPage />}
 				/>
+				<Route path={$PAGES.AUTH.PASS} element={<ForgotPasswordPage />} />
+			</Route>
+
+			<Route path={$PAGES.UTILS.index} element={<AuthLayout />}>
+				<Route path={$PAGES.UTILS.NEW_PASS} element={<NewPasswordPage />} />
 			</Route>
 		</Routes>
 	)
