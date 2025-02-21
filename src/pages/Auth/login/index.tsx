@@ -38,7 +38,7 @@ const LoginPage = () => {
 	}
 
 	useEffect(() => {
-		if (isAuth) path($PAGES.HOME)
+		if (isAuth) path($PAGES.DASHBOARD.index)
 	}, [isAuth])
 
 	return (
