@@ -40,7 +40,7 @@ const Header = () => {
 						className='cursor-pointer px-7'
 						onClick={() => path($PAGES.AUTH.LOGIN)}
 					>
-						Profile
+						Dashboard
 					</Button>
 				)}
 			</div>

@@ -18,7 +18,7 @@ const DashBoardHeader = () => {
 	}
 
 	return (
-		<header className='w-full h-12 flex gap-3 items-center justify-end px-10 text-white/90'>
+		<header className='w-auto h-12 flex gap-3 items-center justify-end text-white/90'>
 			<div
 				className='cursor-pointer hover:text-violet-500 duration-300 transition-colors'
 				onClick={() => path($PAGES.HOME)}

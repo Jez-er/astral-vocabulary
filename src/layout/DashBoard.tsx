@@ -4,15 +4,17 @@ import { Outlet } from 'react-router'
 
 const DashBoardLayout = () => {
 	return (
-		<section className='flex w-screen h-screen bg-gray-200 text-neutral-800 dark:bg-black/93 dark:text-white/90 overflow-hidden'>
-			<aside className='h-screen w-1/6'>
+		<section className='flex w-full h-full bg-gray-200 text-neutral-800 dark:bg-black/93 dark:text-white/90 mr-10 max-w-screen overflow-hidden'>
+			<aside className='h-screen w-auto'>
 				<DashBoardSideBar />
 			</aside>
-			<main className='w-5/6 h-screen'>
-				<header className='w-full h-12 mt-2'>
+			<main className='w-full h-screen'>
+				<header className='w-auto h-12 mt-2 mx-10'>
 					<DashBoardHeader />
 				</header>
-				<Outlet />
+				<main className='h-auto w-auto overflow-auto'>
+					<Outlet />
+				</main>
 			</main>
 		</section>
 	)

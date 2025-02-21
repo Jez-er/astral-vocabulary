@@ -17,7 +17,9 @@ export const AuthService = {
 			email: fields.email,
 			password: fields.password,
 		})
-
+		if (response.data.user) {
+			localStorage.setItem('userID', response.data.user.id)
+		}
 		return response
 	},
 

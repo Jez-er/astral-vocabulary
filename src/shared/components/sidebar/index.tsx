@@ -10,7 +10,7 @@ const DashBoardSideBar = () => {
 	const { pathname } = useLocation()
 
 	return (
-		<section className='w-full h-screen bg-white text-neutral-800 dark:bg-neutral-950 dark:text-white/90 border border-neutral-800 flex flex-col items-center justify-around'>
+		<section className='w-80 h-screen bg-white text-neutral-800 dark:bg-neutral-950 dark:text-white/90 border border-neutral-800 flex flex-col items-center justify-around'>
 			<header className='w-full py-3 flex items-center justify-center border-b border-neutral-800 text-2xl'>
 				<Logo WithText />
 			</header>

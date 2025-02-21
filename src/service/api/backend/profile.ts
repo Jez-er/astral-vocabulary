@@ -9,7 +9,6 @@ export const ProfileService = {
 			.from('Profiles')
 			.insert([{ user_id: userId, name: fields.name }])
 			.select()
-		if (data.status === 200) localStorage.removeItem('userID')
 		return data
 	},
 
