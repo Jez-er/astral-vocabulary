@@ -52,6 +52,7 @@ export const useUserStore = create<IUserStore>()(
 			logout: async () => {
 				try {
 					await AuthService.logOut()
+					localStorage.removeItem('userID')
 					set(() => ({
 						user: {} as IProfile,
 						isAuth: false,
