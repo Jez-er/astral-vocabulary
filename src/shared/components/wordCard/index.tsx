@@ -36,7 +36,7 @@ const WordCard = ({ data }: props) => {
 	}
 
 	return (
-		<div className='bg-neutral-950 p-5 rounded-xl w-[22rem] h-28 shadow-md transition-shadow hover:shadow-sm hover:shadow-violet-500 dark:hover:shadow-violet-500 duration-300 cursor-pointer flex flex-col items-start text-start'>
+		<div className='bg-neutral-950 p-5 rounded-xl 2xl:w-[22rem] lg:w-72 xl:w-[16rem] max-2xl:w-[20rem] h-28 shadow-md transition-shadow hover:shadow-sm hover:shadow-violet-500 dark:hover:shadow-violet-500 duration-300 cursor-pointer flex flex-col items-start text-start'>
 			<div className='flex items-center w-full'>
 				<h1 className='font-semibold text-xl w-56 truncate'>{data.Word}</h1>
 				<div className='ml-auto'>{getBadge(data.variant)}</div>

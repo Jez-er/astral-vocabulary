@@ -15,11 +15,11 @@ const DashBoard = () => {
 				<h1 className='flex gap-2 items-center text-4xl font-semibold text-violet-500'>
 					Vocabulary <IcBook />
 				</h1>
-				<div className='w-full items-center mt-5 flex pr-20'>
+				<div className='2xl:w-full 2xl:items-center 2xl:mt-5 2xl:flex 2xl:pr-20'>
 					<h2 className='font-medium text-lg text-white/50'>
 						On this page, you can write and edit words.
 					</h2>
-					<div className='ml-auto flex items-center gap-5 dark:text-white/90'>
+					<div className='xl:ml-auto max-2xl:mt-5 flex items-center gap-5 max-2xl:ml-auto lg:ml-0 dark:text-white/90'>
 						<AddWordDialog />
 						<div className='block'>
 							<Select>
@@ -55,7 +55,7 @@ const DashBoard = () => {
 			{wordsData.loading ? (
 				<main>Loading...</main>
 			) : wordsData.words ? (
-				<main className='w-auto h-auto grid grid-cols-[repeat(auto-fill,_minmax(22rem,_1fr))] gap-y-10 gap-x-10 ml-8 mt-5 mr-10'>
+				<main className='w-auto h-auto grid 2xl:grid-cols-[repeat(auto-fill,_minmax(22rem,_1fr))] lg:grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] xl:grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] max-2xl:grid-cols-[repeat(auto-fill,_minmax(20rem,_1fr))] max-2xl:gap-x-2 max-2xl:gap-y-2 gap-y-10 gap-x-10 ml-8 mt-5 mr-10'>
 					{wordsData.words.map((data, index) => (
 						<OpenWordDialog data={data} key={index} />
 					))}
