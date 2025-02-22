@@ -37,7 +37,7 @@ const AddWordDialog = () => {
 					Add new
 				</Button>
 			</DialogTrigger>
-			<DialogContent className='dark:text-white/90 w-96 shadow-md shadow-violet-500'>
+			<DialogContent className='dark:text-white/90 w-96'>
 				<DialogHeader>
 					<DialogTitle>Add new word to your vocabulary</DialogTitle>
 					<DialogDescription>

@@ -15,7 +15,7 @@ export const WordsService = {
 					variant: 'New',
 				},
 			])
-			.select(`Word, Translate, variant`)
+			.select(`id, Word, Translate, variant`)
 
 		return data
 	},
@@ -23,8 +23,21 @@ export const WordsService = {
 	async getAll(userId: string) {
 		const response = await $API
 			.from('Words')
-			.select(`Word, Translate, variant`)
+			.select(`id, Word, Translate, variant`)
 			.eq('user_id', userId)
 		return response
+	},
+
+	async update(fields: IWordFields, id: number) {
+		const response = await $API
+			.from('Words')
+			.update({ Word: fields.word, Translate: fields.translation })
+			.eq('id', id)
+			.select(`id, Word, Translate, variant`)
+		return response
+	},
+
+	async delete(id: number) {
+		return $API.from('Words').delete().eq('id', id)
 	},
 }
