@@ -17,6 +17,11 @@ const $PAGES = {
 	},
 	DASHBOARD: {
 		index: '/dashboard',
+		GAMES: {
+			index: '/dashboard/games',
+			WORDFLIP: '/dashboard/games/wordflip',
+			// BACKTRACK: '/dashboard/games/backtrack',
+		},
 	},
 }
 
