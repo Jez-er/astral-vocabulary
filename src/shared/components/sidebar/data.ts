@@ -15,4 +15,15 @@ export const SideBarPages: ISideBarElements[] = [
 	},
 ]
 
-export const SideBarGames: ISideBarElements[] = []
+export const SideBarGames: ISideBarElements[] = [
+	{
+		title: 'WordFlip',
+		path: $PAGES.DASHBOARD.GAMES.WORDFLIP,
+		icon: 'RefreshCcw',
+	},
+	// {
+	// 	title: 'BackTrack',
+	// 	path: $PAGES.DASHBOARD.GAMES.BACKTRACK,
+	// 	icon: 'Repeat',
+	// },
+]

@@ -6,6 +6,7 @@ import LoginPage from '@/pages/Auth/login'
 import RegistrationPage from '@/pages/Auth/registration'
 import RegistrationEmailPage from '@/pages/Auth/registration/CheckEmail'
 import RegistrationProfilePage from '@/pages/Auth/registration/ProfilePage'
+import WordFlipGamePage from '@/pages/DashBoard/Games/WordFlip/page'
 import DashBoard from '@/pages/DashBoard/index/page'
 import HomePage from '@/pages/Home/page'
 import NewPasswordPage from '@/pages/utils/NewPass.tsx/page'
@@ -42,6 +43,12 @@ export const AppRoutes = () => {
 
 			<Route path={$PAGES.DASHBOARD.index} element={<DashBoardLayout />}>
 				<Route index element={<DashBoard />} />
+				<Route path={$PAGES.DASHBOARD.GAMES.index}>
+					<Route
+						path={$PAGES.DASHBOARD.GAMES.WORDFLIP}
+						element={<WordFlipGamePage />}
+					/>
+				</Route>
 			</Route>
 		</Routes>
 	)

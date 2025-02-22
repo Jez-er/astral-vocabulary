@@ -5,6 +5,7 @@ export interface IWord {
 	Word: string
 	Translate: string
 	variant: TWordVariant
+	scores: number
 }
 
 export interface IWordFields {

@@ -1,7 +1,6 @@
 import $PAGES from '@/app/routing/page.config'
 import { IcDiscord } from '@/assets/icons/IcDiscord'
 import { IcTelegram } from '@/assets/icons/IcTelegram'
-import { Switch } from '@/shared/ui/switch'
 import { useNavigate } from 'react-router'
 
 const DashBoardHeader = () => {
@@ -26,8 +25,8 @@ const DashBoardHeader = () => {
 				Home
 			</div>
 			<div className='w-0.5 h-10 bg-neutral-600 rounded-full' />
-			<Switch />
-			<div className='w-0.5 h-10 bg-neutral-600 rounded-full' />
+			{/* <ThemeSwitcher />
+			<div className='w-0.5 h-10 bg-neutral-600 rounded-full' /> */}
 			<div
 				className='cursor-pointer hover:text-violet-500 duration-300 transition-all'
 				onClick={() => goDiscord()}

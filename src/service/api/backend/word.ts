@@ -1,5 +1,5 @@
 import $API from '@/app/api'
-import { IWordFields } from '@/types/words.types'
+import { IWordFields, TWordVariant } from '@/types/words.types'
 
 export const WordsService = {
 	async create(fields: IWordFields) {
@@ -23,7 +23,7 @@ export const WordsService = {
 	async getAll(userId: string) {
 		const response = await $API
 			.from('Words')
-			.select(`id, Word, Translate, variant`)
+			.select(`id, Word, Translate, variant, scores`)
 			.eq('user_id', userId)
 		return response
 	},
@@ -34,6 +34,29 @@ export const WordsService = {
 			.update({ Word: fields.word, Translate: fields.translation })
 			.eq('id', id)
 			.select(`id, Word, Translate, variant`)
+		return response
+	},
+
+	async updateScores(scores: number, id: number) {
+		let variant: TWordVariant = 'New'
+
+		if (scores >= 50) {
+			variant = 'Learning'
+		} else {
+			variant = 'New'
+		}
+
+		if (scores >= 200) {
+			variant = 'Master'
+		} else {
+			variant = 'New'
+		}
+
+		const response = await $API
+			.from('Words')
+			.update({ scores: scores, variant: variant })
+			.eq('id', id)
+			.select()
 		return response
 	},
 
